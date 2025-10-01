@@ -1,7 +1,7 @@
 const prompt = require("prompt-sync")();
 let taches = [];
 
-function Tache(id, description, isDone = false) {
+function Tach (id, description, isDone = false) {
     this.id = id;
     this.description = description;
     this.isDone = isDone;
@@ -21,15 +21,15 @@ function menu() {
 }
 
 function Afficher() {
-    taches.map((e) => console.log(e.id, e.description, e.isDone));
+    taches.map((e) =>{console.log("id :",e.id,"description :", e.description,"isDone :", e.isDone)});
 }
 
 function Ajouter() {
     let tache = prompt(" Ajouter une tâche :");
-    taches.push(new Tache(taches.length, tache));
+    taches.push(new Tache(taches.lenght+1, tache , "en attente"));
 }
 
-function Modifier() {
+function Rechercher() {
     let tache = prompt("Rechercher une tâche à modifier :");
     let app = taches.find((e) => e.description == tache);
     if (app) {
@@ -39,6 +39,14 @@ function Modifier() {
     } else {
         console.log("Tâche non trouvée.");
     }
+}
+function modifier(id) {
+    let description=prompt("description")
+    for (let i=0 ; i<taches.length ; i++){
+        if (id==taches[i].id){
+           taches[i].description=description
+        }
+    }   
 }
 
 function Supprimer() {
@@ -69,9 +77,10 @@ do {
             Ajouter();
             break;
         case 3:
+            Rechercher();
             break;
         case 4:
-            Modifier();
+            modifier();
             break;
         case 5:
             Supprimer();
